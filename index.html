@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Support Rihan</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top, #2463ff 0%, transparent 35%),
+        linear-gradient(135deg, #07152f, #111c3c 55%, #050a18);
+    color: white;
+    padding: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 470px;
+    padding: 28px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.profile h1 {
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+.profile p {
+    color: #b9c7e8;
+    font-size: 14px;
+}
+
+label {
+    display: block;
+    margin: 16px 0 7px;
+    color: #dce5ff;
+    font-size: 14px;
+}
+
+input, textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.10);
+    color: white;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9ca9c8;
+}
+
+textarea {
+    height: 90px;
+    resize: none;
+}
+
+.amount-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.amount-box button {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.10);
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.amount {
+    min-width: 130px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.quick button {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.09);
+    color: white;
+    cursor: pointer;
+}
+
+.quick button:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.pay {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #1677ff, #5b4dff);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(35,100,255,0.35);
+}
+
+.pay:hover {
+    transform: translateY(-1px);
+}
+
+.note {
+    text-align: center;
+    color: #8f9dbb;
+    font-size: 12px;
+    margin-top: 16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="profile">
+        <h1>💙 Support Rihan</h1>
+        <p>Enjoying the stream? You can support me here!</p>
+    </div>
+
+    <label>Your Name</label>
+    <input id="name" type="text" placeholder="Enter your name">
+
+    <label>Add a Message</label>
+    <textarea id="message" maxlength="100"
+        placeholder="Write something..."></textarea>
+
+    <div class="amount-box">
+        <button onclick="changeAmount(-10)">−</button>
+
+        <div class="amount">
+            ₹<span id="amount">40</span>
+        </div>
+
+        <button onclick="changeAmount(10)">+</button>
+    </div>
+
+    <div class="quick">
+        <button onclick="setAmount(40)">₹40</button>
+        <button onclick="setAmount(100)">₹100</button>
+        <button onclick="setAmount(500)">₹500</button>
+        <button onclick="setAmount(1000)">₹1K</button>
+        <button onclick="setAmount(2000)">₹2K</button>
+        <button onclick="setAmount(10000)">₹10K</button>
+    </div>
+
+    <button class="pay" onclick="payNow()">
+        💸 Pay Now
+    </button>
+
+    <div class="note">
+        Secure UPI payment • Thank you for your support ❤️
+    </div>
+
+</div>
+
+<script>
+
+/*
+  IMPORTANT:
+  Replace this with your father's actual UPI ID.
+  Example:
+  const UPI_ID = "example@upi";
+*/
+
+const UPI_ID = "YOUR-UPI-ID-HERE";
+
+const PAYEE_NAME = "Rihan Support";
+
+let amount = 40;
+
+function updateAmount() {
+    document.getElementById("amount").innerText = amount;
+}
+
+function setAmount(value) {
+    amount = value;
+    updateAmount();
+}
+
+function changeAmount(value) {
+    amount += value;
+
+    if (amount < 1) {
+        amount = 1;
+    }
+
+    updateAmount();
+}
+
+function payNow() {
+
+    const name = document.getElementById("name").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name.");
+        return;
+    }
+
+    if (UPI_ID === "YOUR-UPI-ID-HERE") {
+        alert("UPI ID has not been added yet.");
+        return;
+    }
+
+    let note = "Support from " + name;
+
+    if (message !== "") {
+        note += " - " + message;
+    }
+
+    const upiURL =
+        "upi://pay" +
+        "?pa=" + encodeURIComponent(UPI_ID) +
+        "&pn=" + encodeURIComponent(PAYEE_NAME) +
+        "&am=" + encodeURIComponent(amount.toFixed(2)) +
+        "&cu=INR" +
+        "&tn=" + encodeURIComponent(note);
+
+    window.location.href = upiURL;
+}
+
+</script>
+
+</body>
+</html>
